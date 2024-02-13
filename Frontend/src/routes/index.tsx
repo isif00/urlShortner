@@ -1,24 +1,32 @@
 import { component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
+import "../global.css";
+import Container from "~/components/container/container";
+import type { InitialValues } from "@modular-forms/qwik";
+import type { UrlForm } from "~/components/urlInput/urlInput";
+import UrlInput from "~/components/urlInput/urlInput";
+
+export const useFormLoader = routeLoader$<InitialValues<UrlForm>>(
+    () => ({
+        url: '',
+    })
+);
+
 
 export default component$(() => {
   return (
-    <>
-      <h1>Hi 👋</h1>
-      <p>
-        Can't wait to see what you build with qwik!
-        <br />
-        Happy coding.
-      </p>
-    </>
+    <div class="main-container">
+      <Container />
+      <UrlInput></UrlInput>
+    </div>
   );
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to Qwik",
+  title: "Url Shortener",
   meta: [
     {
-      name: "description",
+      name: "shorten your urls for free",
       content: "Qwik site description",
     },
   ],
