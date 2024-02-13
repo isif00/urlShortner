@@ -1,4 +1,4 @@
-import type { ObjectId } from "mongodb";
+import type { ObjectId } from "mongoose";
 
 interface ILink {
     id: ObjectId;
@@ -6,4 +6,4 @@ interface ILink {
     shortenedLink: string;
 }
 
-export type {ILink};
+export type { ILink };

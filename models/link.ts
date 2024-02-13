@@ -1,27 +1,13 @@
-import { ObjectId } from "mongodb";
-
+import mongoose, { Schema } from "mongoose";
+import { nanoid } from "nanoid";
 import type { ILink } from "../interfaces/link";
 
-export default class Link implements ILink{
-    public _id: ObjectId;
-    public _link: string;
-    public _shortenedLink: string;
 
-    constructor(url: string, shortnedLink: string) {
-        this._id = new ObjectId();
-        this._link = url;
-        this._shortenedLink = shortnedLink;
-    }
+const linkSchema = new Schema<ILink>({
+  url: { type: String, required: true },
+  shortenedLink: { type: String, default: () => nanoid(5)},
+});
 
-    public get id(): ObjectId {
-        return this._id;
-    }
-    public get url(): string {
-        return this._link;
-    }
+const LinkModel = mongoose.model<ILink>('Link', linkSchema);
 
-    public get shortenedLink(): string {
-        return this._shortenedLink;
-    }
-}
-
+export { LinkModel as Link };
